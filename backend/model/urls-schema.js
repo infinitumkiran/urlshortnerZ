@@ -3,11 +3,13 @@ const mongoose=require('mongoose')
 const urlschema=mongoose.Schema({
     hash: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     url: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     date: {
         type: Date,
