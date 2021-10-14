@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const NavBar = () => {
     return (
-<AppBar position="absolute" style={{backgroundColor: "black",height: "10%"}}>
+<AppBar position="absolute" style={{backgroundColor: "transparent",height: "10%"}}>
   <Toolbar variant="dense">
     <NavLink to ="./" style= { {color:"cyan",
         textDecoration: 'none',
