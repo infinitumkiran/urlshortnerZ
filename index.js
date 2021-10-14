@@ -111,7 +111,7 @@ app.post('/', addurl);
 // })
 
 const url = 'mongodb://user:123@cluster0-shard-00-00.vnfe8.mongodb.net:27017,cluster0-shard-00-01.vnfe8.mongodb.net:27017,cluster0-shard-00-02.vnfe8.mongodb.net:27017/Cluster0?ssl=true&replicaSet=atlas-eg6j6l-shard-0&authSource=admin&retryWrites=true&w=majority';
-const PORT = '4000';
+const PORT = process.env.PORT ||'4000';
 
 mongoose.connect(url, { useNewUrlParser: true }).then(() => {
     app.listen(PORT, () => console.log('DB connected successfully'))
