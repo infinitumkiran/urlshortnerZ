@@ -9,7 +9,8 @@ const sha256 = require('sha256');
 const app = express();
 
 app.use(bodyParser.json({ extended: true }));
-const router=express.router();
+
+const router=express.Router();
 app.use(router);
 app.use(cors());
 
