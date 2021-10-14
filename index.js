@@ -106,9 +106,9 @@ app.post('/', addurl);
 
 // app.get('/:url', geturl);
 
-// app.get('/', (req, res) => {
-//     console.log("HELOO");
-// })
+app.get('/', (req, res) => {
+    res.send("HELOO");
+})
 
 const url = 'mongodb://user:123@cluster0-shard-00-00.vnfe8.mongodb.net:27017,cluster0-shard-00-01.vnfe8.mongodb.net:27017,cluster0-shard-00-02.vnfe8.mongodb.net:27017/Cluster0?ssl=true&replicaSet=atlas-eg6j6l-shard-0&authSource=admin&retryWrites=true&w=majority';
 const PORT = process.env.PORT ||'4000';
