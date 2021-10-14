@@ -20,7 +20,7 @@ const onValueChange = (e) => {
 
 const addurlfromtxtfield = async() =>{
 
-axios.post("http://localhost:4000", url).then((response)=>{
+axios.post("https://cryptic-headland-94862.herokuapp.com/https://infinitly.herokuapp.com/", url).then((response)=>{
       console.log(response);
       seturl(response.data);
     }).catch((error) =>{
@@ -64,12 +64,12 @@ axios.post("http://localhost:4000", url).then((response)=>{
         <div class="box">
           <div class="inner-box">
 
-            <div class="text">Here is your shortened URL: http://localhost:4000/{url.hash} </div>
+            <div class="text">Here is your shortened URL:  https://infinitly.herokuapp.com/{url.hash} </div>
             <Button
               className='but'
               buttonStyle='btn1--outline'
               buttonSize='btn1--large'
-              onClick={(e)=>{navigator.clipboard.writeText(`http://localhost:4000/${url.hash}`)}}
+              onClick={(e)=>{navigator.clipboard.writeText(` https://infinitly.herokuapp.com/${url.hash}`)}}
             >
               Copy Link
             </Button>
