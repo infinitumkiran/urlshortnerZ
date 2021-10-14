@@ -69,7 +69,7 @@ axios.post("http://localhost:4000", url).then((response)=>{
               className='but'
               buttonStyle='btn1--outline'
               buttonSize='btn1--large'
-            
+              onClick={(e)=>{navigator.clipboard.writeText(`http://localhost:4000/${url.hash}`)}}
             >
               Copy Link
             </Button>
