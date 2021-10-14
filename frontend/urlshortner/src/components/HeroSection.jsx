@@ -20,7 +20,7 @@ const onValueChange = (e) => {
 
 const addurlfromtxtfield = async() =>{
 
-axios.post("https://cryptic-headland-94862.herokuapp.com/https://infinitly.herokuapp.com/", url).then((response)=>{
+axios.post("https://infinitly.herokuapp.com/", url).then((response)=>{
       console.log(response);
       seturl(response.data);
     }).catch((error) =>{
