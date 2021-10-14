@@ -4,12 +4,10 @@ const urlschema=mongoose.Schema({
     hash: {
         type: String,
         required: true,
-        unique: true
     },
     url: {
         type: String,
         required: true,
-        unique: true
     },
     date: {
         type: Date,

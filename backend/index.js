@@ -5,10 +5,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 var base64 = require('base-64');
 const { response } = require('express');
-
+const sha256 = require('sha256');
 const app = express();
 app.use(bodyParser.json({ extended: true }));
 app.use(cors());
+
 
 var a = 1;
 
@@ -17,29 +18,35 @@ const addurl = async (req, res) => {
     const URL = req.body;
     console.log(req.body);
 
-    var encodedData = base64.encode(URL.url);
+    var encodedData = sha256(new Date().toISOString()+URL.url);
 
     var newencoded = encodedData.slice(0, 10);
-
+    
     console.log((newencoded));
+    console.log(sha256.x2('hello'));
 
     const fetchdata = await z.find({ url: URL.url });
 
     if (fetchdata.length != 0) {
-        console.log("url hash already exists");
-        newencoded = a.toString() + newencoded;
-        a++;
-        console.log(newencoded);
-        const newurl = new z({ hash: newencoded, url: URL.url });
+        if (URL.url==fetchdata[0].url) {
+            res.status(201).json(fetchdata[0]);
+        }
+        else {
+            console.log("url hash already exists");
+            newencoded = a.toString() + newencoded;
+            a++;
+            console.log(newencoded);
+            const newurl = new z({ hash: newencoded, url: URL.url });
 
-        try {
-            await newurl.save();
-            console.log(newurl);
-            res.status(201).json(newurl);
+            try {
+                await newurl.save();
+                console.log(newurl);
+                res.status(201).json({ hash: newencoded, url: URL.url });
 
-        } catch (err) {
-            console.log(err);
-            res.status(409).json(err);
+            } catch (err) {
+                console.log(err);
+                res.status(409).json(err);
+            }
         }
 
     }
@@ -49,11 +56,9 @@ const addurl = async (req, res) => {
     else {
         const newurl = new z({ hash: newencoded, url: URL.url });
 
-
-
         try {
             await newurl.save();
-            res.status(201).json(newurl);
+            res.status(201).json({ hash: newencoded, url: URL.url });
 
         } catch (err) {
             console.log(err);
@@ -65,30 +70,41 @@ const addurl = async (req, res) => {
 
 
 }
+app.get("/:hash", async (req, res) => {
 
+    const fetchdata = await z.find({ hash: req.params.hash });
+    console.log(fetchdata);
+    console.log("HELLO WORLD");
+    if (fetchdata.length != 0) {
 
-
-
-
-const geturl = async (req, res) => {
-    try {
-        const fetchdata = await z.find({ url: req.params.url });
-        //console.log(fetchdata[0].url);
-        // const user = await .find();
-        // response.status(200).json(url);
-    } catch (error) {
-        response.status(404).json({ message: error.message })
+        res.redirect(fetchdata[0].url);
+    }
+    else {
+        res.send(404);
     }
 
 
-}
+})
+
+// const geturl = async (req, res) => {
+//     try {
+//         const fetchdata = await z.find({ url: req.params.url });
+//         //console.log(fetchdata[0].url);
+//         // const user = await .find();
+//         // response.status(200).json(url);
+//     } catch (error) {
+//         response.status(404).json({ message: error.message })
+//     }
+
+
+
 
 
 
 
 app.post('/', addurl);
 
-app.get('/:url', geturl);
+// app.get('/:url', geturl);
 
 // app.get('/', (req, res) => {
 //     console.log("HELOO");
