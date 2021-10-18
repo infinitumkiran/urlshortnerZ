@@ -12,8 +12,7 @@ app.use(bodyParser.json({ extended: true }));
 
 const router=express.Router();
 app.use(router);
-app.use(cors());
-
+app.options('*', cors()); 
 
 var a = 1;
 
@@ -117,7 +116,13 @@ router.get('/', (req, res) => {
 const url = 'mongodb://user:123@cluster0-shard-00-00.vnfe8.mongodb.net:27017,cluster0-shard-00-01.vnfe8.mongodb.net:27017,cluster0-shard-00-02.vnfe8.mongodb.net:27017/Cluster0?ssl=true&replicaSet=atlas-eg6j6l-shard-0&authSource=admin&retryWrites=true&w=majority';
 const PORT = process.env.PORT ||4000 ;
 
-mongoose.connect(url, { useNewUrlParser: true }).then(() => {
+mongoose.connect(url, { useNewUrlParser: true }).then(()=>{
+    console.log('connected to mongodb')
+
 })
+.catch(err=>{
+    console.log("cannot connect to mongodb :",err);
+    process.exit();
+});
 app.listen(PORT, () => console.log('DB connected successfully'));
 
