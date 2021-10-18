@@ -20,7 +20,7 @@ const onValueChange = (e) => {
 
 const addurlfromtxtfield = async() =>{
 
-axios.post("https://infinitly.herokuapp.com/", url).then((response)=>{
+await axios.post("https://infinitly.herokuapp.com/", url).then((response)=>{
       console.log(response);
       seturl(response.data);
     }).catch((error) =>{
